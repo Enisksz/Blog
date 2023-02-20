@@ -5,18 +5,20 @@ from blog.models import Post
 class PostListSerializer(serializers.ModelSerializer):
     class Meta:
         model = Post
-        fields = ['id','title','content','created','modified','image']
+        fields = ['id','user','title','content','created','modified','image','category']
 
 class PostCreateSerializer(serializers.ModelSerializer):
     class Meta:
         model = Post
-        fields = ('title','content','image')
+        fields = ('title','user','content','image','category')
 
     def create(self, validated_data):
         post = Post(
             title = validated_data['title'],
             content = validated_data['content'],
-            image = validated_data['image']
+            image = validated_data['image'],
+            user = validated_data['user'],
+            category = validated_data['category']
         )
         post.save()
         return post
