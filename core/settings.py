@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'blog',
     'accounts',
     'category',
+    'comment',
 
     'rest_framework',
 ]
