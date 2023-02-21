@@ -9,5 +9,8 @@ class Category(models.Model):
     class Meta:
         verbose_name_plural = 'categories'
     
+    def post_count(self):
+        return self.postuser.count()
+
     def __str__(self):
         return self.name

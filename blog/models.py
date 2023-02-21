@@ -9,7 +9,7 @@ class Post(models.Model):
     title = models.CharField(max_length=200)
     content = models.TextField()
     image = models.ImageField(upload_to='posts-images/',null=True,blank=True)
-    category = models.ForeignKey(Category,on_delete=models.SET_NULL,null=True,blank=True)
+    category = models.ForeignKey(Category,on_delete=models.SET_NULL,null=True,blank=True,related_name='postuser')
     created = models.DateTimeField(auto_now_add=True)
     modified = models.DateTimeField(auto_now=True)
 
