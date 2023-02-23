@@ -1,8 +1,10 @@
 from django.shortcuts import render
 from rest_framework.generics import ListAPIView,CreateAPIView,RetrieveUpdateAPIView,RetrieveDestroyAPIView
-from .serializers import CommentListSerializer,CommentCreateSerializer,CommentUpdateSerializer,CommentDeleteSerializer
+from rest_framework.permissions import IsAuthenticated
 
+from .serializers import CommentListSerializer,CommentCreateSerializer,CommentUpdateSerializer,CommentDeleteSerializer
 from comment.models import Comment
+
 
 # Create your views here.
 
@@ -17,6 +19,7 @@ class CommentCreateAPIView(CreateAPIView):
 
     queryset = Comment.objects.all()
     serializer_class = CommentCreateSerializer
+    permission_classes = [IsAuthenticated,]
 
     def perform_create(self, serializer):
         serializer.save(user=self.request.user)
@@ -25,9 +28,11 @@ class CommentUpdateAPIView(RetrieveUpdateAPIView):
 
     queryset = Comment.objects.all()
     serializer_class = CommentUpdateSerializer
+    permission_classes = [IsAuthenticated,]
     lookup_field = 'pk'
 
 class CommentDeleteAPIView(RetrieveDestroyAPIView):
     queryset = Comment.objects.all()
     serializer_class = CommentDeleteSerializer
+    permission_classes = [IsAuthenticated,]
     lookup_field = 'pk'
